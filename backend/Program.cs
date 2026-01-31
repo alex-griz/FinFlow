@@ -19,7 +19,7 @@ public class Program
         app.UseCors("AllowClient");
 
         app.MapGet("/Auth", (string username, string password) => commands.Authorization(username, password));
-        app.MapGet("/Profile", (string username) => commands.LoadUserData(username));
+        app.MapGet("/Reg", (string username, string password) => commands.Registration(username, password));
         
         app.Run();
     }

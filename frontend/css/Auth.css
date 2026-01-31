@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'SourceCodePro', monospace;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.wrapper{
+    background: linear-gradient(0deg,rgba(8, 1, 41, 1) 0%, rgba(1, 22, 87, 1) 100%);
+    width: 100%;
+    
+}
+
+.logo{
+    font-weight: 800;
+    margin-left: 10%;
+    padding-top: 5%;
+    font-size: 50px;
+}
+.container{
+    margin-left: 40%;
+    margin-top: 5%;
+    font-size: 30px;
+    height: 50%;
+    width: 20%;
+}
+.container h2{
+    padding-left: 15%;
+    padding-bottom: 5%;
+    font-weight: 400;
+}
+.auth-form{
+    font-size: 25px;
+    font-weight: 400;
+    padding-left: 3%;
+}
+.auth-form button{
+    margin-left: 12%;
+    margin-top: 10%;
+    font-size: 25px;
+    color: #fff;
+    width: 35%;
+    background: transparent;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 15px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.auth-form input{
+    font-size: 25px;
+    width: 60%;
+}
+.auth-form a{
+    font-size: 20px;
+}
