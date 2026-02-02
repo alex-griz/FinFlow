@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@300;400;500;600;700;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'SourceCodePro', monospace;
+    color: #fff;
+}
+h2{
+    font-weight: 400;
+    font-size: 40px;
+    margin-top: 5px;
+}
+button{
+    width: 45%;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #fff;
+    border-radius: 9px;
+    border-width: 3px;
+    margin-bottom: 5%;
+    color: #fff;
+    font-size: 24px;
+    padding: 3%;
+}
+.wrapper{
+    background: linear-gradient(0deg,rgba(8, 1, 41, 1) 0%, rgba(1, 22, 87, 1) 100%);
+    width: 100%;
+    min-height: 100vh;
+}
+.logo{
+    font-weight:800;
+    margin-left: 10%;
+    padding-top: 5%;
+    font-size: 25px;
+}
+.main{
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+}
+.incomes{
+    margin-left: 12%;
+    width: 25%;
+    min-height: 50%;
+    border-style: none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px); 
+}
+.expences{
+    margin-left: 3%;
+    width: 25%;
+    min-height: 50%;
+    border-style: none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px); 
+}
+.savings{
+    margin-left: 3%;
+    width: 25%;
+    min-height: 50%;
+    border-style: none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); 
+}
