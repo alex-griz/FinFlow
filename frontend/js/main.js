@@ -1,17 +1,18 @@
 const API_URL = "http://localhost:5000";
+let username = ''
 
 async function Login() 
 {
     const username_box = document.getElementById('username_box');
     const password_box = document.getElementById('password_box');
-    let username = username_box.value.trim();
+    username = username_box.value.trim();
     let password = password_box.value.trim();
 
     if(!username || !password){
         alert('Введите имя пользователя и пароль!');
         return;
     }
-    const url = API_URL+`/Auth?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    let url = API_URL+`/Auth?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     try{
         let response = await fetch(url);
         let result = await response.json();
@@ -30,7 +31,7 @@ async function Registration()
 {
     const username_box = document.getElementById('username_box');
     const password_box = document.getElementById('password_box');
-    let username = username_box.value.trim();
+    username = username_box.value.trim();
     let password = password_box.value.trim();
 
     if(!username || !password){
@@ -38,7 +39,7 @@ async function Registration()
         return;
     }
 
-    const url = API_URL + `/Reg?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    let url = API_URL + `/Reg?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     try{
         let response = await fetch(url);
         let result = await response.json();
@@ -53,4 +54,8 @@ async function Registration()
     catch(error){
         alert('Ошибка при создании аккаунта, попробуйте ещё раз');
     }
+}
+async function LoadData()
+{
+    let url = API_URL +`/LoadData?username=${encodeURIComponent(username)}`;
 }

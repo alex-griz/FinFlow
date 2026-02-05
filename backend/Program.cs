@@ -20,7 +20,7 @@ public class Program
 
         app.MapGet("/Auth", (string username, string password) => commands.Authorization(username, password));
         app.MapGet("/Reg", (string username, string password) => commands.Registration(username, password));
-        
+        app.MapGet("/LoadData", (string username)=> commands.LoadData(username));
         app.Run();
     }
 }
