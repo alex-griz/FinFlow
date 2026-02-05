@@ -65,13 +65,34 @@ public class Commands
         for (int i =0; i<data.Rows.Count; i++)
         {
             result[i] = new DataObject(){
-                type = Convert.ToInt32(data.Rows[i][0]),
-                name = data.Rows[i][1].ToString(),
-                value = Convert.ToInt32(data.Rows[i][2]),
-                constant = Convert.ToInt32(data.Rows[i][3])
+                type = Convert.ToInt32(data.Rows[i][1]),
+                name = data.Rows[i][2].ToString(),
+                value = Convert.ToInt32(data.Rows[i][3]),
+                constant = Convert.ToInt32(data.Rows[i][4])
             };
         }
         return result;
+    }
+    public int AddItem(string username, DataObject item)
+    {
+        using var connection = dataBase.GetConnection();
+        using var command = new MySqlCommand("INSERT INTO `UsersData` (`Username`, `Type`, `Name`, `Value`, `Constant`) VALUES (@U, @T, @N, @V, @C)", connection);
+        command.Parameters.AddWithValue("@U", username);
+        command.Parameters.AddWithValue("@T", item.type);
+        command.Parameters.AddWithValue("@N", item.name);
+        command.Parameters.AddWithValue("@V", item.value);
+        command.Parameters.AddWithValue("@C", item.constant);
+
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+            return 1;
+        }
+        catch
+        {
+            return 0;
+        }
     }
 }
 public class DataObject()
