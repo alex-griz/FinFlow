@@ -6,7 +6,7 @@
     <title>FinFlow</title>
     <link rel="stylesheet" href="css/Main.css">
 </head>
-<body>
+<body onload="LoadData()">
     <div class="wrapper">
         <div class="logo">
             <h1>FinFlow</h1>
@@ -17,21 +17,37 @@
                 <div class="incomes-items">
 
                 </div>
-                <button id="add_income">Добавить</button>
+                <button id="add_income" onclick="OpenModal()"">Добавить</button>
             </div>
             <div class="expences">
                 <h2>Расходы</h2>
                 <div class="expences-items">
 
                 </div>
-                <button id="add_expence">Добавить</button>
+                <button id="add_expence" onclick="OpenModal()">Добавить</button>
             </div>
             <div class="savings">
                 <h2>Накопления</h2>
                 <div class="savings-items">
                     
                 </div>
-                <button id="add_saving">Добавить</button>
+                <button id="add_saving" onclick="OpenModal()"">Добавить</button>
+            </div>
+        </div>
+    </div>
+    <div id="add_window">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Добавить элемент</h2>
+                <span class="close-space" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="name-box" placeholder="Отображаемое название">
+                <input type="text" id="value-box" placeholder="100">
+                <input type="checkbox" id = "const-value">
+            </div>
+            <div class="modal-footer">
+                <button onclick="AddData()">Сохранить</button>
             </div>
         </div>
     </div>

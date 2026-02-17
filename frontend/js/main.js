@@ -89,6 +89,10 @@ async function LoadData()
         }
     });
 }
+async function AddData()
+{
+    
+}
 function CreateItem(item)
 {
     const div = document.createElement('div');
@@ -96,4 +100,9 @@ function CreateItem(item)
     div.innerHTML = `
     <div class="item-content">${item.name+':'+item.value}</div>`;
     return div;
+}
+function OpenModal()
+{
+    document.getElementById("add_window").style.display = 'block';
+    document.body.style.overflow = 'hidden';
 }

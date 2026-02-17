@@ -95,7 +95,7 @@ public class Commands
         }
     }
 }
-public class DataObject()
+public class DataObject
 {
     public int type {get; set;}
     public string name {get; set;}
