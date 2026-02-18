@@ -67,7 +67,7 @@ async function LoadData()
 {
     let url = API_URL +`/LoadData?username=${encodeURIComponent(username)}`;
     let response = await fetch(url);
-    let userData = (await response.json()).map(item => new DataObject(item));
+    let userData = (await response.json()).map(item => new DataObject(item.type,item.name, item.value, item.constant));
 
     const incomes_list = document.getElementById("incomes-items");
     const expences_list = document.getElementById("expences-items");
@@ -89,9 +89,32 @@ async function LoadData()
         }
     });
 }
-async function AddData()
+async function AddData(item_type)
 {
-    
+    const namebox = document.getElementById("name-box");
+    const valuebox = document.getElementById("value-box");
+    const constvaluebox = document.getElementById("const-value");
+    if(!namebox.value || !valuebox.value){
+        alert('Заполните все поля!');
+        return;
+    }
+    else{
+        let userData = {
+        type: item_type,
+        name: namebox.value,
+        value: valuebox.value,
+        constant: constvaluebox.checked ? 1 : 0
+       };
+       let url = API_URL + `/AddData?username=${encodeURIComponent(username)}`;
+       let response = await fetch(url, {method:'POST', headers:{'Content-Type': 'application/json'}, body: JSON.stringify(userData)});
+
+       if(response.ok){
+        alert('Запись успешно добавлена!');
+       }
+       else{
+        alert('Не удалось создать запись');
+       }
+    }
 }
 function CreateItem(item)
 {
@@ -102,7 +125,12 @@ function CreateItem(item)
     return div;
 }
 function OpenModal()
-{
+{ 
     document.getElementById("add_window").style.display = 'block';
     document.body.style.overflow = 'hidden';
+}
+function closeModal()
+{
+    document.getElementById("add_window").style.display = 'none';
+    document.body.style.overflow = 'auto';
 }

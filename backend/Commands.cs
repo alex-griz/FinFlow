@@ -7,7 +7,6 @@ public class Commands
     DataBase dataBase = new DataBase();
     public int Authorization(string username, string password)
     {
-        Console.WriteLine("Попытка авторизации пользователя"+username);
         using var connection = dataBase.GetConnection();
         using var command = new MySqlCommand("SELECT `Username` FROM `AuthData` WHERE `Username` = @U AND `Password` = @P", connection);
         command.Parameters.AddWithValue("@U", username);

@@ -14,24 +14,24 @@
         <div class="main">
             <div class="incomes">
                 <h2>Доходы</h2>
-                <div class="incomes-items">
+                <div class="incomes-items" id="incomes-items">
 
                 </div>
-                <button id="add_income" onclick="OpenModal()"">Добавить</button>
+                <button id="add_income" onclick="OpenModal(0)">Добавить</button>
             </div>
             <div class="expences">
                 <h2>Расходы</h2>
-                <div class="expences-items">
+                <div class="expences-items" id="expences-items">
 
                 </div>
-                <button id="add_expence" onclick="OpenModal()">Добавить</button>
+                <button id="add_expence" onclick="OpenModal(1)">Добавить</button>
             </div>
             <div class="savings">
                 <h2>Накопления</h2>
-                <div class="savings-items">
+                <div class="savings-items" id="savings-items">
                     
                 </div>
-                <button id="add_saving" onclick="OpenModal()"">Добавить</button>
+                <button id="add_saving" onclick="OpenModal(2)">Добавить</button>
             </div>
         </div>
     </div>
@@ -44,7 +44,9 @@
             <div class="modal-body">
                 <input type="text" id="name-box" placeholder="Отображаемое название">
                 <input type="text" id="value-box" placeholder="100">
-                <input type="checkbox" id = "const-value">
+                <label class="checkbox">
+                    <input type="checkbox" id="const-value"> Постоянное значение
+                </label>
             </div>
             <div class="modal-footer">
                 <button onclick="AddData()">Сохранить</button>
@@ -52,5 +54,5 @@
         </div>
     </div>
 </body>
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 </html>
