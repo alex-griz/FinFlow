@@ -68,6 +68,10 @@ async function LoadData()
     let url = API_URL +`/LoadData?username=${encodeURIComponent(username)}`;
     let response = await fetch(url);
     let userData = (await response.json()).map(item => new DataObject(item.type,item.name, item.value, item.constant));
+    let summary_income = 0;
+    let summary_stable_income = 0;
+    let summary_expence = 0;
+    let summary_stable_expence = 0;
 
     const incomes_list = document.getElementById("incomes-items");
     const expences_list = document.getElementById("expences-items");
@@ -78,16 +82,31 @@ async function LoadData()
         if (element.type == 0)
         {
             incomes_list.appendChild(item);
+            summary_income += parseFloat(element.value);
+            if (element.constant == 1)
+            {
+                summary_stable_income += parseFloat(element.value);
+            }
         }
         if (element.type == 1)
         {
             expences_list.appendChild(item);
+            summary_expence += parseFloat(element.value);
+            if (element.constant == 1)
+            {
+                summary_stable_expence += parseFloat(element.value);
+            }
         }
         if(element.type ==2)
         {
             savings_list.appendChild(item);
         }
     });
+    document.getElementById("summary_income").innerText = `Суммарный доход: ${summary_income.toString()}`;
+    document.getElementById("summary_stable_income").innerText = `Постоянный доход: ${summary_stable_income.toString()}`;
+    document.getElementById("summary_expence").innerText = `Суммарный расход: ${summary_expence.toString()}`;
+    document.getElementById("summary_stable_expence").innerText = `Постоянный расход: ${summary_stable_expence.toString()}`;
+    document.getElementById("free_money").innerText = `Остаток: ${(summary_income - summary_expence).toString()}`;
 }
 async function AddData(item_type)
 {

@@ -37,13 +37,13 @@ button{
 }
 .main{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 3%;
+    margin-left: 12%;
 }
 .incomes{
-    margin-left: 12%;
     width: 25%;
-    min-height: 50%;
+    height: 50%;
     border-style: none;
     border-radius: 15px;
     display: flex;
@@ -55,7 +55,7 @@ button{
 .expences{
     margin-left: 3%;
     width: 25%;
-    min-height: 50%;
+    height: 50%;
     border-style: none;
     border-radius: 15px;
     display: flex;
@@ -67,7 +67,7 @@ button{
 .savings{
     margin-left: 3%;
     width: 25%;
-    min-height: 50%;
+    height: 50%;
     border-style: none;
     border-radius: 15px;
     display: flex;
@@ -161,4 +161,31 @@ button{
     padding-bottom: 3%;
     padding-top: 3%;
     font-size: 24px;
+}
+.results
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 12%;
+    margin-top: 5%;
+    width: 76%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    border-style: none;
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+.results h2
+{
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 1%;
+    margin-left: 7%;
+}
+.results h3{
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 1%;
+    margin-left: 3%;
 }
