@@ -22,6 +22,7 @@ public class Program
         app.MapPost("/Reg", (string username, string password) => commands.Registration(username, password));
         app.MapGet("/LoadData", (string username)=> commands.LoadData(username));
         app.MapPost("/AddData",(string username, DataObject item) => commands.AddItem(username, item));
+        app.MapDelete("/RemoveData",(string username, string item_name) => commands.RemoveItem(username,item_name));
         
         app.Run();
     }

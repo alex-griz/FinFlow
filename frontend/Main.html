@@ -36,11 +36,11 @@
         </div>
         <div class="results">
             <h3>Статистика за месяц:</h3>
+            <h2 id="free_money"></h2>
             <h2 id="summary_income"></h2>
             <h2 id="summary_stable_income"></h2>
             <h2 id="summary_expence"></h2>
             <h2 id="summary_stable_expence"></h2>
-            <h2 id="free_money"></h2>
         </div>
     </div>
     <div id="add_window">
@@ -57,9 +57,13 @@
                 </label>
             </div>
             <div class="modal-footer">
-                <button onclick="AddData()">Сохранить</button>
+                <button onclick="AddData(currentItemType)">Сохранить</button>
             </div>
         </div>
+    </div>
+    <div class="context-menu" id="context-menu">
+        <button id="delete-button">Удалить</button>
+        <button id="replenish-button" style="display: none;">Пополнить</button>
     </div>
 </body>
 <script src="js/main.js"></script>

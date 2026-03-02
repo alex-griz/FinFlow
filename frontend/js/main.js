@@ -1,12 +1,14 @@
 const API_URL = "http://localhost:5000";
-let username = ''
+let currentItemType = 0;
+let username = sessionStorage.getItem('username') || '';
 
 class DataObject{
-    constructor(type,name,value,constant){
+    constructor(type,name,value,constant,progress){
         this.type = type;
         this.name = name;
         this.value = value;
         this.constant = constant;
+        this.progress = progress;
     }
 }
 async function Login() 
@@ -25,6 +27,7 @@ async function Login()
         let response = await fetch(url);
         let result = await response.json();
         if(result === 1){
+            sessionStorage.setItem('username', username);
             window.location.href = 'Main.html';
         }
         else{
@@ -127,10 +130,7 @@ async function AddData(item_type)
        let url = API_URL + `/AddData?username=${encodeURIComponent(username)}`;
        let response = await fetch(url, {method:'POST', headers:{'Content-Type': 'application/json'}, body: JSON.stringify(userData)});
 
-       if(response.ok){
-        alert('Запись успешно добавлена!');
-       }
-       else{
+       if(!response.ok){
         alert('Не удалось создать запись');
        }
     }
@@ -139,12 +139,28 @@ function CreateItem(item)
 {
     const div = document.createElement('div');
     div.className = 'list-item';
-    div.innerHTML = `
-    <div class="item-content">${item.name+':'+item.value}</div>`;
+    if (item.type ==2){
+        div.innerHTML = `<div class="item-content">${item.name+':'+item.progress+'/'+item.value}</div>`;
+    }
+    else{
+        div.innerHTML = `<div class="item-content">${item.name+':'+item.value}</div>`;
+    }
+    div.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        showContextMenu(e, item);});
+
     return div;
 }
-function OpenModal()
+async function RemoveItem(name){
+    let url = API_URL + `/RemoveData?username=${encodeURIComponent(username)}&item_name=${encodeURIComponent(name)}`;
+    let response = await fetch(url ,{method: 'DELETE'});
+    if (!response.ok){
+        alert('Не удалось удалить запись');
+    }
+}
+function OpenModal(type)
 { 
+    currentItemType = type;
     document.getElementById("add_window").style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -152,4 +168,31 @@ function closeModal()
 {
     document.getElementById("add_window").style.display = 'none';
     document.body.style.overflow = 'auto';
+}
+function showContextMenu(e, item) {
+    const menu = document.getElementById('context-menu');
+    
+    menu.style.left = e.pageX + 'px';
+    menu.style.top = e.pageY + 'px';
+    menu.style.display = 'flex';
+    
+    menu.setAttribute('data-current-item', item.name);
+    menu.setAttribute('data-current-type', item.type);
+    
+    const deleteBtn = document.getElementById('delete-button');
+    const editBtn = document.getElementById('replenish-button');
+    
+    deleteBtn.onclick = function() {
+        RemoveItem(item.name);
+    };
+    
+    if (item.type == 2){
+        editBtn.style .display = 'block';
+    }
+    editBtn.onclick = function() {
+        Replenish_saving(item.name);
+    }
+}
+function Replenish_saving(name){
+    
 }

@@ -67,7 +67,8 @@ public class Commands
                 type = Convert.ToInt32(data.Rows[i][1]),
                 name = data.Rows[i][2].ToString(),
                 value = Convert.ToInt32(data.Rows[i][3]),
-                constant = Convert.ToInt32(data.Rows[i][4])
+                constant = Convert.ToInt32(data.Rows[i][4]),
+                progress = data.Rows[i][5] == DBNull.Value ? 0 : Convert.ToInt32(data.Rows[i][5])
             };
         }
         return result;
@@ -75,17 +76,43 @@ public class Commands
     public int AddItem(string username, DataObject item)
     {
         using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("INSERT INTO `UsersData` (`Username`, `Type`, `Name`, `Value`, `Constant`) VALUES (@U, @T, @N, @V, @C)", connection);
+        using var command = new MySqlCommand("INSERT INTO `UsersData` (`Username`, `Type`, `Name`, `Value`, `Constant`, `Progress`) VALUES (@U, @T, @N, @V, @C, @P)", connection);
         command.Parameters.AddWithValue("@U", username);
         command.Parameters.AddWithValue("@T", item.type);
         command.Parameters.AddWithValue("@N", item.name);
         command.Parameters.AddWithValue("@V", item.value);
         command.Parameters.AddWithValue("@C", item.constant);
 
+        if (item.type == 2)
+        {
+            command.Parameters.AddWithValue("@P", 0);
+        }
+        else
+        {
+            command.Parameters.Add("@P", MySqlDbType.Int16).Value = null;
+        }
         try
         {
             connection.Open();
             command.ExecuteNonQuery();
+            return 1;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+    public int RemoveItem(string username, string name)
+    {
+        using var connection = dataBase.GetConnection();
+        using var command = new MySqlCommand("DELETE FROM `UsersData` WHERE `Username` = @U AND `Name` = @N", connection);
+        command.Parameters.AddWithValue("@U", username);
+        command.Parameters.AddWithValue("@N", name);
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+
             return 1;
         }
         catch
@@ -100,4 +127,5 @@ public class DataObject
     public string name {get; set;}
     public int value {get; set;}
     public int constant {get; set;}
+    public int progress {get; set;}
 }
