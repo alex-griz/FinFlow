@@ -65,6 +65,18 @@
         <button id="delete-button">Удалить</button>
         <button id="replenish-button" style="display: none;">Пополнить</button>
     </div>
+    <div id="topup_window">
+        <div class="topup-content">
+            <div class="topup-header">
+                <h2>Пополнить накопление</h2>
+                <span class="close-space" onclick="closeTopup()">&times;</span>
+            </div>
+            <div class="topup-body">
+                <input type="text" id="valuebox" placeholder="100">
+                <button onclick="topup_saving()">Сохранить</button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="js/main.js"></script>
 </html>

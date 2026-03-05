@@ -1,5 +1,6 @@
 const API_URL = "http://localhost:5000";
 let currentItemType = 0;
+let current_saving_name = '';
 let username = sessionStorage.getItem('username') || '';
 
 class DataObject{
@@ -190,9 +191,29 @@ function showContextMenu(e, item) {
         editBtn.style .display = 'block';
     }
     editBtn.onclick = function() {
-        Replenish_saving(item.name);
+        show_topup_window(item.name);
     }
 }
-function Replenish_saving(name){
-    
+function show_topup_window(name){
+    current_saving_name = name;
+    document.getElementById("topup_window").style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+async function topup_saving(){
+    const valuebox = document.getElementById("valuebox");
+    let data = {
+        name: name,
+        value: valuebox.value
+    };
+    let url = API_URL + `/AddData?username=${encodeURIComponent(username)}`;
+    let response = await fetch(url, {method:'POST', headers:{'Content-Type': 'application/json'}, body: JSON.stringify(data)});
+
+    if (!response.ok){
+        alert('Не удалось удалить запись');
+    }
+}
+function closeTopup()
+{
+    document.getElementById("topup_window").style.display = 'none';
+    document.body.style.overflow = 'auto';
 }

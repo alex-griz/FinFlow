@@ -63,12 +63,13 @@ public class Commands
         DataObject[] result = new DataObject[data.Rows.Count];
         for (int i =0; i<data.Rows.Count; i++)
         {
+            object progressValue = data.Rows[i][5];
             result[i] = new DataObject(){
                 type = Convert.ToInt32(data.Rows[i][1]),
                 name = data.Rows[i][2].ToString(),
                 value = Convert.ToInt32(data.Rows[i][3]),
                 constant = Convert.ToInt32(data.Rows[i][4]),
-                progress = data.Rows[i][5] == DBNull.Value ? 0 : Convert.ToInt32(data.Rows[i][5])
+                progress = progressValue == DBNull.Value ? 0 : Convert.ToInt32(progressValue)
             };
         }
         return result;
@@ -120,6 +121,10 @@ public class Commands
             return 0;
         }
     }
+    /*public int TopupSaving(string username, string name, int value)
+    {
+        
+    }*/
 }
 public class DataObject
 {
