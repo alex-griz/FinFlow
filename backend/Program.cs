@@ -23,7 +23,7 @@ public class Program
         app.MapGet("/LoadData", (string username)=> commands.LoadData(username));
         app.MapPost("/AddData",(string username, DataObject item) => commands.AddItem(username, item));
         app.MapDelete("/RemoveData",(string username, string item_name) => commands.RemoveItem(username,item_name));
-        //app.MapPost("/TopupSaving", (string username, string name, int value) => commands.TopupSaving(username, name, value));
+        app.MapPost("/TopupSaving", (string username, string name, int value) => commands.TopupSaving(username, name, value));
         app.Run();
     }
 }

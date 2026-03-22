@@ -71,7 +71,7 @@ async function LoadData()
 {
     let url = API_URL +`/LoadData?username=${encodeURIComponent(username)}`;
     let response = await fetch(url);
-    let userData = (await response.json()).map(item => new DataObject(item.type,item.name, item.value, item.constant));
+    let userData = (await response.json()).map(item => new DataObject(item.type,item.name, item.value, item.constant, item.progress));
     let summary_income = 0;
     let summary_stable_income = 0;
     let summary_expence = 0;
@@ -200,17 +200,7 @@ function show_topup_window(name){
     document.body.style.overflow = 'hidden';
 }
 async function topup_saving(){
-    const valuebox = document.getElementById("valuebox");
-    let data = {
-        name: name,
-        value: valuebox.value
-    };
-    let url = API_URL + `/AddData?username=${encodeURIComponent(username)}`;
-    let response = await fetch(url, {method:'POST', headers:{'Content-Type': 'application/json'}, body: JSON.stringify(data)});
-
-    if (!response.ok){
-        alert('Не удалось удалить запись');
-    }
+    
 }
 function closeTopup()
 {

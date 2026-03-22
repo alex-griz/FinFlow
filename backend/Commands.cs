@@ -63,13 +63,12 @@ public class Commands
         DataObject[] result = new DataObject[data.Rows.Count];
         for (int i =0; i<data.Rows.Count; i++)
         {
-            object progressValue = data.Rows[i][5];
             result[i] = new DataObject(){
                 type = Convert.ToInt32(data.Rows[i][1]),
                 name = data.Rows[i][2].ToString(),
                 value = Convert.ToInt32(data.Rows[i][3]),
                 constant = Convert.ToInt32(data.Rows[i][4]),
-                progress = progressValue == DBNull.Value ? 0 : Convert.ToInt32(progressValue)
+                progress = data.Rows[i][5] == DBNull.Value ? 0 : Convert.ToInt32(data.Rows[i][5])
             };
         }
         return result;
@@ -121,10 +120,27 @@ public class Commands
             return 0;
         }
     }
-    /*public int TopupSaving(string username, string name, int value)
+    public int TopupSaving(string username, string name, int value)
     {
-        
-    }*/
+        using var connection = dataBase.GetConnection();
+        using var command = new MySqlCommand("UPDATE `UsersData` SET `Progress` = `Progress` + @V WHERE `Username` = @U AND `Name` = @N", connection);
+        command.Parameters.AddWithValue("@U", username);
+        command.Parameters.AddWithValue("@N", name);
+        command.Parameters.AddWithValue("@V", value);
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+
+            DataObject dataObject = new DataObject{ constant = 0, name = "Пополнение накопления", type=1, value = value, progress = 0};
+            AddItem(username, dataObject);
+            return 1;
+        }
+        catch
+        {
+            return 0;
+        }
+    }
 }
 public class DataObject
 {
