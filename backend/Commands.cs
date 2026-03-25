@@ -1,17 +1,16 @@
 using System.Data;
-using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 namespace backend;
 public class Commands
 {
-    DataBase dataBase = new DataBase();
     public int Authorization(string username, string password)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("SELECT `Username` FROM `AuthData` WHERE `Username` = @U AND `Password` = @P", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("SELECT `Username` FROM `AuthData` WHERE `Username` = @U AND `Password` = @P", connection);
         command.Parameters.AddWithValue("@U", username);
         command.Parameters.AddWithValue("@P", password);
-        using var adapter = new MySqlDataAdapter(command);
+        using var adapter = new SQLiteDataAdapter(command);
         using var result = new DataTable();
 
         connection.Open();
@@ -28,10 +27,10 @@ public class Commands
     }
     public int Registration(string username, string password)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("SELECT `Username` FROM `AuthData` WHERE `Username` = @U", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("SELECT `Username` FROM `AuthData` WHERE `Username` = @U", connection);
         command.Parameters.AddWithValue("@U", username);
-        using var adapter = new MySqlDataAdapter(command);
+        using var adapter = new SQLiteDataAdapter(command);
         using var result = new DataTable();
 
         connection.Open();
@@ -51,10 +50,10 @@ public class Commands
     }
     public DataObject[] LoadData(string username)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("SELECT * FROM `UsersData` WHERE `Username` = @U", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("SELECT * FROM `UsersData` WHERE `Username` = @U", connection);
         command.Parameters.AddWithValue("@U", username);
-        using var adapter = new MySqlDataAdapter(command);
+        using var adapter = new SQLiteDataAdapter(command);
         using var data = new DataTable();
 
         connection.Open();
@@ -75,8 +74,8 @@ public class Commands
     }
     public int AddItem(string username, DataObject item)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("INSERT INTO `UsersData` (`Username`, `Type`, `Name`, `Value`, `Constant`, `Progress`) VALUES (@U, @T, @N, @V, @C, @P)", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("INSERT INTO `UsersData` (`Username`, `Type`, `Name`, `Value`, `Constant`, `Progress`) VALUES (@U, @T, @N, @V, @C, @P)", connection);
         command.Parameters.AddWithValue("@U", username);
         command.Parameters.AddWithValue("@T", item.type);
         command.Parameters.AddWithValue("@N", item.name);
@@ -89,7 +88,7 @@ public class Commands
         }
         else
         {
-            command.Parameters.Add("@P", MySqlDbType.Int16).Value = null;
+            command.Parameters.AddWithValue("@P", null);
         }
         try
         {
@@ -104,8 +103,8 @@ public class Commands
     }
     public int RemoveItem(string username, string name)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("DELETE FROM `UsersData` WHERE `Username` = @U AND `Name` = @N", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("DELETE FROM `UsersData` WHERE `Username` = @U AND `Name` = @N", connection);
         command.Parameters.AddWithValue("@U", username);
         command.Parameters.AddWithValue("@N", name);
         try
@@ -122,8 +121,8 @@ public class Commands
     }
     public int TopupSaving(string username, string name, int value)
     {
-        using var connection = dataBase.GetConnection();
-        using var command = new MySqlCommand("UPDATE `UsersData` SET `Progress` = `Progress` + @V WHERE `Username` = @U AND `Name` = @N", connection);
+        using var connection = new SQLiteConnection("Data Source = app.db");
+        using var command = new SQLiteCommand("UPDATE `UsersData` SET `Progress` = `Progress` + @V WHERE `Username` = @U AND `Name` = @N", connection);
         command.Parameters.AddWithValue("@U", username);
         command.Parameters.AddWithValue("@N", name);
         command.Parameters.AddWithValue("@V", value);
