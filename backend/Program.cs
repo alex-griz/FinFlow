@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.SpaServices.StaticFiles;
 namespace backend;
 
 public class Program
@@ -13,10 +15,17 @@ public class Program
             .AllowAnyMethod()
             .AllowAnyHeader());
         });
+        builder.Services.AddSpaStaticFiles(configuration =>
+        {
+            configuration.RootPath = "../frontend";
+        });
 
         var app = builder.Build();
 
         app.UseCors("AllowClient");
+        
+        app.UseStaticFiles();
+        app.UseSpaStaticFiles();
 
         app.MapGet("/Auth", (string username, string password) => commands.Authorization(username, password));
         app.MapGet("/Reg", (string username, string password) => commands.Registration(username, password));

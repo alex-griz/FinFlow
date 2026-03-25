@@ -9,6 +9,7 @@
       "backend/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "10.0.1",
+          "Microsoft.AspNetCore.SpaServices.Extensions": "10.0.5",
           "MySql.Data": "9.6.0",
           "System.Data.SQLite.Core": "1.0.119"
         },
@@ -68,6 +69,14 @@
           "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll": {
             "assemblyVersion": "10.0.1.0",
             "fileVersion": "10.0.125.57005"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SpaServices.Extensions/10.0.5": {
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.SpaServices.Extensions.dll": {
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -260,6 +269,13 @@
       "sha512": "sha512-gMY53EggRIFawhue66GanHcm1Tcd0+QzzMwnMl60LrEoJhGgzA9qAbLx6t/ON3hX4flc2NcEbTK1Z5GCLYHcwA==",
       "path": "microsoft.aspnetcore.openapi/10.0.1",
       "hashPath": "microsoft.aspnetcore.openapi.10.0.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.SpaServices.Extensions/10.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2UvKOj49YwWsDcxtv4wDJqgsD3RuhvFdBhez7YBKJTvH4+Akd05FnDkFEzJs+yxKShTfQ/F5zLNlNJLtAgRNzQ==",
+      "path": "microsoft.aspnetcore.spaservices.extensions/10.0.5",
+      "hashPath": "microsoft.aspnetcore.spaservices.extensions.10.0.5.nupkg.sha512"
     },
     "Microsoft.OpenApi/2.0.0": {
       "type": "package",

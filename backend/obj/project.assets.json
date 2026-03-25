@@ -93,6 +93,18 @@
           "build/Microsoft.AspNetCore.OpenApi.targets": {}
         }
       },
+      "Microsoft.AspNetCore.SpaServices.Extensions/10.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Microsoft.AspNetCore.SpaServices.Extensions.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.SpaServices.Extensions.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.OpenApi/2.0.0": {
         "type": "package",
         "compile": {
@@ -395,6 +407,20 @@
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.SpaServices.Extensions/10.0.5": {
+      "sha512": "2UvKOj49YwWsDcxtv4wDJqgsD3RuhvFdBhez7YBKJTvH4+Akd05FnDkFEzJs+yxKShTfQ/F5zLNlNJLtAgRNzQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.spaservices.extensions/10.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net10.0/Microsoft.AspNetCore.SpaServices.Extensions.dll",
+        "microsoft.aspnetcore.spaservices.extensions.10.0.5.nupkg.sha512",
+        "microsoft.aspnetcore.spaservices.extensions.nuspec"
+      ]
+    },
     "Microsoft.OpenApi/2.0.0": {
       "sha512": "GGYLfzV/G/ct80OZ45JxnWP7NvMX1BCugn/lX7TH5o0lcVaviavsLMTxmFV2AybXWjbi3h6FF1vgZiTK6PXndw==",
       "type": "package",
@@ -625,6 +651,7 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "Microsoft.AspNetCore.OpenApi >= 10.0.1",
+      "Microsoft.AspNetCore.SpaServices.Extensions >= 10.0.5",
       "MySql.Data >= 9.6.0",
       "System.Data.SQLite.Core >= 1.0.119"
     ]
@@ -682,6 +709,10 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.1, )"
+          },
+          "Microsoft.AspNetCore.SpaServices.Extensions": {
+            "target": "Package",
+            "version": "[10.0.5, )"
           },
           "MySql.Data": {
             "target": "Package",
