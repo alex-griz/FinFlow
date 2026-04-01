@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://stunning-fishstick-v6rgpqxqv5wwfwrv9-5000.app.github.dev";
 let currentItemType = 0;
 let current_saving_name = '';
 let username = sessionStorage.getItem('username') || '';
