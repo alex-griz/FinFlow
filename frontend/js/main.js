@@ -186,6 +186,9 @@ function showContextMenu(e, item) {
     deleteBtn.onclick = function() {
         RemoveItem(item.name);
     };
+    editBtn.onclick = function(){
+        show_topup_window(item.name);
+    }
     
     if (item.type == 2){
         editBtn.style .display = 'block';
@@ -200,7 +203,18 @@ function show_topup_window(name){
     document.body.style.overflow = 'hidden';
 }
 async function topup_saving(){
-    
+    const valuebox = document.getElementById("valuebox");
+    if(!valuebox.value){
+        alert('Заполните все поля!');
+        return;
+    }
+    else{
+        let url = API_URL + `/TopupSaving?username=${encodeURIComponent(username)}&name=${encodeURIComponent(current_saving_name)}&value=${encodeURIComponent(valuebox.value)}`;
+        let response = await fetch(url , {method: 'POST'});
+        if (!response.ok){
+            alert("Не удалось пополнить накопление");
+        }
+    }
 }
 function closeTopup()
 {

@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.SpaServices.StaticFiles;
 namespace backend;
 
 public class Program
